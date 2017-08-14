@@ -1,0 +1,72 @@
+<?php
+
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function avatar_utils_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the clarity module.
+    case 'help.page.avatar_utils':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Avatar Utils') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_block_build_alter().
+ * @param array $build
+ * @param \Drupal\Core\Block\BlockPluginInterface $block
+ */
+function avatar_utils_block_build_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+  switch($block->getBaseId()){
+    case 'system_menu_block':
+      if($block->getDerivativeId() == 'main'){
+        $build['#cache']['contexts'][] = 'url.path';
+      }
+      break;
+    case 'system_breadcrumb_block':
+      $build['#cache']['contexts'][] = 'url.path';
+      break;
+  }
+}
+
+/**
+ * Implements hook_node_insert().
+ * @param \Drupal\node\Entity\Node $node
+ */
+function avatar_utils_node_insert($node) {
+  avatar_utils_invalidate_node_type_tags($node->getType());
+}
+
+/**
+ * Implements hook_node_update().
+ * @param \Drupal\node\Entity\Node $node
+ */
+function avatar_utils_node_update($node) {
+  avatar_utils_invalidate_node_type_tags($node->getType());
+}
+
+/**
+ * Implements hook_node_delete().
+ * @param \Drupal\node\Entity\Node $node
+ */
+function avatar_utils_node_delete($node) {
+  avatar_utils_invalidate_node_type_tags($node->getType());
+}
+
+/**
+ * Provides a cache tag for whenever a node of a specific type is added, updated or deleted.
+ * Format is node_type:<node_type>
+ *
+ * @param string $node_type
+ */
+function avatar_utils_invalidate_node_type_tags($node_type){
+  Cache::invalidateTags(['node_type:'.$node_type]);
+}

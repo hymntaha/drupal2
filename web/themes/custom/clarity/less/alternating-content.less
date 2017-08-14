@@ -1,0 +1,54 @@
+article.alternating-content{
+  .content{
+    display: table-row;
+
+    @media(max-width:@grid-float-breakpoint-max){
+      display:block;
+      .container;
+    }
+  }
+
+  .field--name-body{
+    margin-bottom:0 !important;
+  }
+
+  .alternating-content-cell{
+    width:50%;
+    display:table-cell;
+    vertical-align: middle;
+
+    img{
+      width:100%;
+      display: inline-block;
+      vertical-align: bottom;
+    }
+
+    &.alternating-content-cell-right{
+      &.text{
+        > div[class^="col-"]{
+          .make-md-column-offset(1);
+        }
+      }
+    }
+
+    @media(max-width:@grid-float-breakpoint-max){
+      width:100%;
+      padding:45px 0;
+      display:block;
+      .make-row();
+
+      > div[class^="col-"]{
+        left:0 !important;
+      }
+
+      &.text{
+        .node-title{
+          margin:0;
+        }
+      }
+      &.image{
+        display:none;
+      }
+    }
+  }
+}

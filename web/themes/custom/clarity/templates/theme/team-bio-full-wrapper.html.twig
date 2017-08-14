@@ -1,0 +1,14 @@
+{%
+set classes = [
+    'team-bios-full-wrapper',
+]
+%}
+<div{{ attributes.addClass(classes) }}>
+    {% for team_bio in team_bios %}
+        <div class="modal fade" id="team-bio-modal-{{ loop.index }}">
+            <div class="modal-dialog">
+                {{ team_bio }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

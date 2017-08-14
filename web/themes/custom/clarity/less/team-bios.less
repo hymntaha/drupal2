@@ -1,0 +1,47 @@
+article.team-bio{
+  &.full{
+    .field--name-field-team-image{
+      margin-bottom:20px;
+    }
+
+    .field--name-field-client-name{
+      .h3;
+      margin:0 0 10px 0;
+    }
+  }
+  &.teaser{
+    cursor:pointer;
+    margin-bottom:50px;
+
+    .field--name-field-team-image{
+      margin-bottom:8px;
+
+      img{
+        opacity: 1;
+        .transition(opacity 0.25s ease-in);
+      }
+    }
+
+    .field--name-field-client-name{
+      color:@link-color;
+      font-size:18px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .field--name-field-client-information{
+      .small;
+    }
+
+    @media(min-width:@grid-float-breakpoint){
+      &:hover{
+        .field--name-field-team-image img{
+          opacity:.55;
+        }
+        .field--name-field-client-name{
+          color:@link-hover-color;
+        }
+      }
+    }
+  }
+}

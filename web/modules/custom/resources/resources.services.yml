@@ -1,0 +1,9 @@
+services:
+  resources.menu.service:
+    class: Drupal\resources\ResourcesMenuService
+    arguments: ['@entity_type.manager', '@path.current', '@avatar.utils.terms']
+  resources.breadcrumb:
+    class: Drupal\resources\ResourcesBreadcrumbBuilder
+    arguments: ['@entity.manager']
+    tags:
+      - { name: breadcrumb_builder, priority: 1003 }

@@ -1,0 +1,87 @@
+/**
+ * @file
+ * Visual styles for fields.
+ */
+
+.field--label {
+  font-weight: bold;
+}
+.field--label-inline .field--label,
+.field--label-inline .field--items {
+  float: left; /*LTR*/
+}
+.field--label-inline .field--label,
+.field--label-inline > .field--item,
+.field--label-inline .field--items {
+  padding-right: 0.5em;
+}
+[dir="rtl"] .field--label-inline .field--label,
+[dir="rtl"] .field--label-inline .field--items {
+  padding-left: 0.5em;
+  padding-right: 0;
+}
+.field--label-inline .field--label::after {
+  content: ':';
+}
+
+.field--name-field-hero-image{
+  position: relative;
+  margin-bottom:20px;
+
+  .background-hero-image{
+    @media(max-width:@grid-float-breakpoint-max){
+      background:none !important;
+    }
+    @media(min-width:@grid-float-breakpoint){
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  img{
+    @media(min-width:@grid-float-breakpoint){
+      visibility: hidden;
+    }
+    width:100% !important;
+  }
+}
+
+.field--name-field-intro-text{
+  padding:62px 0 72px 0;
+  font-size:20px;
+  color:#666;
+  border-bottom:1px solid @border-default;
+  margin-bottom:45px;
+}
+
+.field--name-field-cta-large-text{
+  font-size:36px;
+  font-weight:500;
+}
+
+.field--name-field-cta-small-text{
+  font-size:20px;
+}
+
+.field--name-description{
+  @media(max-width:@screen-xs-max){
+    margin-bottom:30px;
+  }
+}
+
+.field--name-field-pdf{
+  .well;
+  margin-top:50px;
+
+  .file{
+    > span{
+      background-color: transparent;
+    }
+  }
+}
+
+.field--name-field-vimeo-id{
+  margin-top:8px;
+  margin-bottom:20px;
+}

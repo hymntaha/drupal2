@@ -1,0 +1,14 @@
+<ul class="nav">
+    {% for year, months in dates %}
+    <li>
+        <a href="#collapse-{{ year }}" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-{{ year }}" role="button">{{ year }}&nbsp;<span class="caret"></span></a>
+        <ul class="collapse nav" id="collapse-{{ year }}">
+            {% for month in months %}
+                <li>
+                    <a href="#">{{ month }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+</ul>

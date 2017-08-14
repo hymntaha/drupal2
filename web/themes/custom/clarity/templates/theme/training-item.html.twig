@@ -1,0 +1,10 @@
+{% if url %}
+<a href="{{ url }}" target="_blank">
+    {% endif %}
+    <i class="fa fa-calendar" aria-hidden="true"></i><div class="training-item">
+        <span class="training-date">{{ date }}</span><br/>
+        <span class="training-time">{{ start_time }} - {{ end_time }}</span>
+    </div>
+    {% if url %}
+</a>
+{% endif %}

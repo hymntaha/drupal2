@@ -1,0 +1,37 @@
+<?php
+/**
+ * @file
+ * Bootstrap sub-theme.
+ *
+ * Place your custom PHP code in this file.
+ */
+
+function clarity_theme_suggestions_alter(array &$suggestions, array $variables, $hook){
+  /** @var \Drupal\node\Entity\Node $node */
+  $full_screen_hooks = ['page', 'page_title'];
+
+  if(in_array($hook, $full_screen_hooks)){
+    if ($node = \Drupal::request()->attributes->get('node')) {
+      switch($node->getType()){
+        case 'homepage':
+        case 'about_us':
+        case 'landing_page':
+        case 'alternating_content':
+        case 'solution':
+          $suggestions[] = $hook.'__full_screen';
+          break;
+      }
+    }
+  }
+}
+
+function clarity_bootstrap_colorize_text_alter(&$texts){
+  $texts['contains']['Download'] = 'primary';
+}
+
+function clarity_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id){
+  if($form_id != 'yamlform_submission_newsletter_sign_up_form'){
+    $form['#attributes']['class'][] = 'form-default';
+    $form['#attributes']['class'][] = 'clearfix';
+  }
+}

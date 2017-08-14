@@ -1,0 +1,24 @@
+.no-margin{
+  margin:0;
+}
+
+.no-padding{
+  padding:0;
+}
+
+.no-border{
+  border:0;
+}
+
+.no-spacing{
+  .no-margin;
+  .no-padding;
+  .no-border;
+}
+
+.transition (@transition) {
+  -webkit-transition: @transition;
+  -moz-transition:    @transition;
+  -ms-transition:     @transition;
+  -o-transition:      @transition;
+}

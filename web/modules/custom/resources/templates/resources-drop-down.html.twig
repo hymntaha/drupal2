@@ -1,0 +1,15 @@
+<div id="resources-drop-down-menu">
+    {{ overview_link }}<br />
+    {{ intro_text | raw }}
+
+    {% for submenu in sub_menus %}
+        <div class="resources-sub-menu">
+            <h4>{{ submenu.title }}</h4>
+            <ul>
+                {% for link in submenu.links %}
+                    <li>{{ link }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>

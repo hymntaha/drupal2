@@ -1,0 +1,9 @@
+services:
+  avatar.utils.url:
+    class: Drupal\avatar_utils\AvatarUtilsUrlService
+    arguments: ['@entity_type.manager']
+  avatar.utils.terms:
+    class: Drupal\avatar_utils\AvatarUtilsTermsService
+    arguments: ['@entity_type.manager', '@module_handler']
+  avatar.utils.csv.data.export:
+    class: Drupal\avatar_utils\AvatarUtilsCSVDataExport

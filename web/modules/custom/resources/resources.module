@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Contains resources.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function resources_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the resources module.
+    case 'help.page.resources':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Resources Enhancements') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function resources_theme($existing, $type, $theme, $path) {
+  return [
+    'resources_drop_down' => [
+      'variables' => [
+        'overview_link' => '',
+        'intro_text' => '',
+        'sub_menus' => [],
+      ]
+    ]
+  ];
+}
+
+/**
+ * Implements hook_block_build_alter().
+ * @param array $build
+ * @param \Drupal\Core\Block\BlockPluginInterface $block
+ */
+function resources_block_build_alter(array &$build, \Drupal\Core\Block\BlockPluginInterface $block) {
+  if($block->getBaseId() == 'menu_block'){
+    $build['#cache']['contexts'][] = 'url.path';
+  }
+}

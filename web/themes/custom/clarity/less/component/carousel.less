@@ -1,0 +1,25 @@
+.carousel-control{
+  color:@brand-primary-dark;
+  width:auto;
+  opacity: 1;
+  font-size:26px;
+  top:30%;
+  text-shadow:none;
+
+  @media(min-width:@grid-float-breakpoint){
+    font-size:48px;
+  }
+
+  &:focus{
+    color:@brand-primary-dark;
+  }
+
+  &:hover{
+    color:@brand-primary-darker;
+  }
+
+  &.left,
+  &.right{
+    background-image:none;
+  }
+}

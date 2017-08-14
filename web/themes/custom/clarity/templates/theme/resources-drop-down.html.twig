@@ -1,0 +1,24 @@
+<div id="resources-drop-down-menu">
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="main-link">{{ overview_link }}</p>
+            {{ intro_text | raw }}
+        </div>
+    </div>
+    <div class="row">
+        {% for submenu in sub_menus %}
+            <div class="col-sm-4">
+                <div class="solutions-sub-menu">
+                    {% if submenu.title %}
+                        <p class="h6">{{ submenu.title }}</p>
+                    {% endif %}
+                    <ul class="nav">
+                        {% for link in submenu.links %}
+                            <li>{{ link }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

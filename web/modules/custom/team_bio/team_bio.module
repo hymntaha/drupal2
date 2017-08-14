@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Contains team_bio.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
+
+/**
+ * Implements hook_help().
+ */
+function team_bio_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the team_bio module.
+    case 'help.page.team_bio':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Hook node integration for team bio') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ * @param array $build
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+ * @param $view_mode
+ */
+function team_bio_node_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if($entity->bundle() == 'about_us'){
+    if($view_mode == 'full'){
+      if($display->getComponent('field_team_bio')){
+
+        $team_bios_full = [
+          '#theme' => ['team_bio_full_wrapper'],
+          '#weight' => $build['field_team_bio']['#weight'] + 1,
+        ];
+
+        foreach(Element::children($build['field_team_bio']) as $delta){
+          $team_bios_full['#team_bios'][] = node_view($build['field_team_bio'][$delta]['#node'], 'full');
+        }
+
+        $build['team_bios_full'] = $team_bios_full;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function team_bio_theme($existing, $type, $theme, $path) {
+  return array(
+    'team_bio_full_wrapper' => array(
+      'variables' => array(
+        'team_bios' => array(),
+      ),
+    ),
+  );
+}

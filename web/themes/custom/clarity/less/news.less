@@ -1,0 +1,98 @@
+#block-views-block-news-block-1{
+  margin-bottom:20px;
+
+  .block-title{
+    margin-bottom:45px;
+  }
+}
+
+.page-node-type-article{
+  .page-header{
+    padding-bottom:45px;
+    border-bottom:1px solid @border-default;
+    margin-bottom:45px;
+  }
+}
+
+.region-content{
+  .yamlform-submission-newsletter-sign-up-form{
+    .well;
+
+    .form-type-email{
+      .make-lg-column(8);
+      padding:0;
+    }
+
+    .form-actions{
+      .make-lg-column(4);
+      padding:0;
+
+      button{
+        text-transform: uppercase;
+        width:100%;
+      }
+    }
+  }
+}
+
+article.article{
+  .field--name-field-publish-date,
+  .field--name-field-tags{
+    .text-muted;
+    .small;
+  }
+  .field--name-field-tags{
+    > .field--item{
+      display:inline-block;
+
+      &:first-child{
+        &:before{
+          content:'In ';
+        }
+      }
+
+      & + .field--item{
+        &:before{
+          content:'/ ';
+        }
+      }
+    }
+  }
+  &.featured,
+  &.teaser{
+    border-top:1px solid @border-default;
+    padding-top:45px;
+    margin-bottom:45px;
+
+    .node-title{
+      text-transform: none;
+    }
+  }
+
+  &.featured{
+    padding-bottom:45px;
+    border-bottom:1px solid @border-default;
+    margin-bottom:20px;
+
+    .node-title{
+      margin-bottom:30px;
+    }
+
+    .field--name-body{
+      margin-top:30px;
+    }
+  }
+
+  &.full{
+    .field--name-body{
+      margin-top:45px;
+    }
+  }
+}
+
+#block-views-block-news-block-2,
+#block-yamlform-2{
+  .pagination-subpage &{
+    display:none;
+  }
+}

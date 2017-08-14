@@ -1,0 +1,8 @@
+whitepaper.email.download:
+  title: 'Whitepaper Emails Download'
+  parent: 'system.admin_reports'
+  route_name: 'whitepaper.admin.email.download'
+whitepaper.settings:
+ title: 'Whitepaper Settings'
+ parent: 'system.admin_config'
+ route_name: 'whitepaper.admin.settings'

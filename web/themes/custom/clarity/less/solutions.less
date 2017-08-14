@@ -1,0 +1,61 @@
+article.solution{
+  &.teaser{
+    .node-title{
+      .text-capitalize;
+      margin-top:9px;
+      margin-bottom:9px;
+    }
+
+    .fa{
+      margin-right:5px;
+    }
+  }
+  &.full{
+    .field--name-body,
+    .field--name-field-bottom-content,
+    .field--name-field-how-we-make-it-easy,
+    .field--name-field-above-cta{
+      margin-bottom:80px;
+    }
+    .field--name-field-alternating-content{
+      & + .container{
+        margin-top:80px;
+      }
+    }
+
+    .how-we-make-it-easy{
+      margin-bottom:40px;
+
+      img{
+        max-width:180px;
+        margin:30px auto 20px auto;
+      }
+
+      div[data-toggle="popover"]{
+        cursor:pointer;
+
+        .field--name-name{
+          color:@link-color;
+        }
+
+        &:hover{
+          .field--name-name{
+            color:@link-hover-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+div.solution-category{
+  &.teaser{
+    .field--name-description{
+      margin-bottom:18px;
+    }
+
+    .field--name-field-image{
+      .field--name-field-vimeo-id;
+    }
+  }
+}

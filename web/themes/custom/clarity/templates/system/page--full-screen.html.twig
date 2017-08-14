@@ -1,0 +1,85 @@
+{% extends "page.html.twig" %}
+
+{% block main %}
+    <div role="main" class="main-container js-quickedit-main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    {# Header #}
+                    {% if page.header %}
+                        {% block header %}
+                            <div role="heading">
+                                {{ page.header }}
+                            </div>
+                        {% endblock %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {# Sidebar First #}
+        {% if page.sidebar_first %}
+            {% block sidebar_first %}
+                <aside class="col-sm-3" role="complementary">
+                    {{ page.sidebar_first }}
+                </aside>
+            {% endblock %}
+        {% endif %}
+
+        {# Content #}
+        {% set content_classes = [] %}
+        <section{{ content_attributes.addClass(content_classes) }}>
+
+            {# Highlighted #}
+            {% if page.highlighted %}
+                {% block highlighted %}
+                    <div class="highlighted">{{ page.highlighted }}</div>
+                {% endblock %}
+            {% endif %}
+
+            {# Action Links #}
+            {% if action_links %}
+                {% block action_links %}
+                    <ul class="action-links">{{ action_links }}</ul>
+                {% endblock %}
+            {% endif %}
+
+            {# Help #}
+            {% if page.help %}
+                {% block help %}
+                    {{ page.help }}
+                {% endblock %}
+            {% endif %}
+
+            {# Content #}
+            {% block content %}
+                <a id="main-content"></a>
+                {{ page.content }}
+            {% endblock %}
+
+            {% if page.content_left or page.content_right %}
+                <div class="row">
+                    {% if page.content_left %}
+                        <div class="col-sm-12 col-md-9">
+                            {{ page.content_left }}
+                        </div>
+                    {% endif %}
+                    {% if page.content_right %}
+                        <div class="col-sm-12 col-md-3">
+                            {{ page.content_right }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
+
+        {# Sidebar Second #}
+        {% if page.sidebar_second %}
+            {% block sidebar_second %}
+                <aside class="col-sm-3" role="complementary">
+                    {{ page.sidebar_second }}
+                </aside>
+            {% endblock %}
+        {% endif %}
+    </div>
+{% endblock %}

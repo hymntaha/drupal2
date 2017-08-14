@@ -1,0 +1,34 @@
+.view-trainings{
+  .views-row{
+    + .views-row{
+      margin-top:45px;
+      border-top:1px solid @border-default;
+      padding-top:45px;
+    }
+  }
+}
+
+.field--name-field-training{
+  .make-row();
+  margin-top:45px;
+
+  > .field--item{
+    .make-sm-column(6);
+    margin-bottom:35px;
+
+    > a{
+      text-decoration: none;
+    }
+
+    .fa-calendar{
+      font-size:52px;
+    }
+  }
+}
+
+.training-item{
+  display:inline-block;
+  padding-left:10px;
+  vertical-align: top;
+  font-weight:bold;
+}

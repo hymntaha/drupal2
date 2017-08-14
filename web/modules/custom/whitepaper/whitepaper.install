@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function whitepaper_schema(){
+  $schema['whitepaper_emails'] = [
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => true,
+        'not null' => true,
+      ],
+      'i_am' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+      ],
+      'first_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+      ],
+      'last_name' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+      ],
+      'whitepaper' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => true,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'email' => ['email'],
+    ],
+  ];
+
+  return $schema;
+}

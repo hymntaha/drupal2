@@ -1,0 +1,5 @@
+name: Training
+type: module
+description: Training field type
+core: 8.x
+package: Clarity

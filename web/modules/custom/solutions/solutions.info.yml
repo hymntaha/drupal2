@@ -1,0 +1,5 @@
+name: Solutions
+type: module
+description: Solutions Enhancements
+core: 8.x
+package: Clarity

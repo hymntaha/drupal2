@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Contains solutions.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function solutions_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the solutions module.
+    case 'help.page.solutions':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Solutions Enhancements') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function solutions_theme($existing, $type, $theme, $path) {
+  return [
+    'solutions_drop_down' => [
+      'variables' => [
+        'overview_link' => '',
+        'intro_text' => '',
+        'sub_menus' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * @param array $build
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+ * @param $view_mode
+ */
+function solutions_node_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if($entity->bundle() == 'landing_page' && $entity->title->value == 'Solutions'){
+    /** @var \Drupal\avatar_utils\AvatarUtilsTermsService $avatarUtilsTermsService */
+    if($avatarUtilsTermsService = \Drupal::service('avatar.utils.terms')){
+      $terms = $avatarUtilsTermsService->getTermsForVocabulary('solution_categories');
+      foreach($terms as $term){
+        $build['solution_categories'][] = [
+          'term' => taxonomy_term_view($term, 'teaser'),
+        ];
+      }
+    }
+  }
+}
+
+function solutions_taxonomy_term_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode){
+  /** @var \Drupal\taxonomy\Entity\Term $entity */
+  if($entity->getVocabularyId() == 'solution_categories' && $view_mode == 'teaser'){
+   /** @var \Drupal\avatar_utils\AvatarUtilsTermsService $avatarUtilsTermsService */
+   if($avatarUtilsTermsService = \Drupal::service('avatar.utils.terms')) {
+     $build['nodes'] = node_view_multiple($avatarUtilsTermsService->getNodesForTerm($entity, 'weight'), 'teaser');
+   }
+ }
+}

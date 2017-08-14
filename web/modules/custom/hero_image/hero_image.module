@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Contains hero_image.module..
+ */
+
+use Drupal\Component\Utility\Unicode;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function hero_image_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the hero_image module.
+    case 'help.page.hero_image':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Theme function for hero images') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function hero_image_theme($existing, $type, $theme, $path) {
+  return [
+    'hero_image' => [
+      'variables' => array('item' => NULL, 'item_attributes' => NULL),
+    ],
+  ];
+}
+
+/**
+ * @param array $variables
+ *   An associative array containing:
+ *   - item: An ImageItem object.
+ *   - item_attributes: An optional associative array of html attributes to be
+ *     placed in the img tag.
+ */
+function template_preprocess_hero_image(&$variables) {
+  $variables['src'] = '';
+  /** @var \Drupal\file\Entity\File $entity */
+  if (($entity = $variables['item']->entity) && empty($variables['item']->uri)) {
+    $variables['src'] = str_replace('http://','//',\Drupal\Core\Url::fromUri($entity->url())->getUri());
+  }
+
+  $variables['image'] = array(
+    '#theme' => 'image',
+  );
+
+  $variables['image']['#attributes'] = $variables['item_attributes'];
+
+  $item = $variables['item'];
+
+  // Do not output an empty 'title' attribute.
+  if (Unicode::strlen($item->title) != 0) {
+    $variables['image']['#title'] = $item->title;
+  }
+
+  if (($entity = $item->entity) && empty($item->uri)) {
+    $variables['image']['#uri'] = $entity->getFileUri();
+  }
+  else {
+    $variables['image']['#uri'] = $item->uri;
+  }
+
+  foreach (array('width', 'height', 'alt') as $key) {
+    $variables['image']["#$key"] = $item->$key;
+  }
+
+}
+

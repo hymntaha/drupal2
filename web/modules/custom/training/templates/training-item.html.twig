@@ -1,0 +1,10 @@
+<span class="training-item">
+    {% if url %}
+        <a href="{{ url }}" target="_blank">
+    {% endif %}
+        <span class="training-date">{{ date }}</span><br />
+        <span class="training-time">{{ start_time }} - {{ end_time }}</span>
+    {% if url %}
+        </a>
+    {% endif %}
+</span>

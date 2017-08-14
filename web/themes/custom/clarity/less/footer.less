@@ -1,0 +1,78 @@
+.footer{
+  background-color:#313131;
+  color:#fff;
+  margin-top:0;
+  padding-bottom:60px;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6{
+    color:#fff;
+  }
+
+  .block-title{
+    .fa{
+      margin-right:8px;
+    }
+  }
+
+  .nav{
+    > li{
+      > a{
+        color:#fff;
+        background-color: transparent;
+        padding-left:0;
+
+        &[data-drupal-link-system-path="node/191"],
+        &[data-drupal-link-system-path="node/192"]{
+          .small;
+        }
+      }
+    }
+  }
+
+  .region-footer{
+    .make-row();
+
+    > *{
+      .make-sm-column(4);
+      margin-bottom:40px;
+
+      @media(min-width:@grid-float-breakpoint){
+        margin-bottom: 0;
+      }
+    }
+
+    > #block-18001231234{
+      .make-xs-column(12);
+      text-align: right;
+    }
+  }
+
+  .webform-submission-form{
+
+    .form-type-email{
+      .make-lg-column(8);
+      padding:0;
+    }
+
+    .form-actions{
+      .make-lg-column(4);
+      padding:0;
+
+      button{
+        text-transform: uppercase;
+        width:100%;
+      }
+    }
+  }
+}

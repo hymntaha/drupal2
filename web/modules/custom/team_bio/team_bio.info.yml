@@ -1,0 +1,5 @@
+name: Team Bio
+type: module
+description: Team Bio Enhancements
+core: 8.x
+package: Clarity

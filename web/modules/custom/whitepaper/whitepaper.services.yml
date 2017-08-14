@@ -1,0 +1,7 @@
+services:
+  whitepaper.emails.storage:
+    class: Drupal\whitepaper\WhitepaperEmailsStorage
+    arguments: ['@database']
+  whitepaper.service:
+    class: Drupal\whitepaper\WhitepaperService
+    arguments: ['@whitepaper.emails.storage', '@plugin.manager.mail', '@language_manager']

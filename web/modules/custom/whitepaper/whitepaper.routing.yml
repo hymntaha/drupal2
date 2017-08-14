@@ -1,0 +1,14 @@
+whitepaper.admin.email.download:
+  path: '/admin/reports/whitepaper_emails_download.csv'
+  defaults:
+    _controller: '\Drupal\whitepaper\Controller\WhitepaperController:whitepaperAdminEmailDownload'
+    _title: 'Whitepaper Emails Download'
+  requirements:
+    _permission: 'access whitepaper emails'
+whitepaper.admin.settings:
+  path: '/admin/config/whitepaper/settings'
+  defaults:
+    _form: '\Drupal\whitepaper\Form\WhitepaperAdminSettingsForm'
+    _title: 'Whitepaper Settings'
+  requirements:
+    _permission: 'admininster site configuration'

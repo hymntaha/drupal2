@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Contains whitepaper.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function whitepaper_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the whitepaper module.
+    case 'help.page.whitepaper':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('White Paper Enhancements') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_node_view().
+ * @param array $build
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ * @param \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display
+ * @param $view_mode
+ */
+function whitepaper_node_view(array &$build, \Drupal\Core\Entity\EntityInterface $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display, $view_mode) {
+  if($entity->bundle() == 'white_paper'){
+    if($view_mode == 'full'){
+
+      if($display->getComponent('field_pdf')){
+
+        /**
+         * Disable Drupal 8 anonymous page caching for white paper pages.
+         * The dynamic context caching below is still in effect.
+         */
+        \Drupal::service('page_cache_kill_switch')->trigger();
+
+        /** @var \Drupal\whitepaper\WhitepaperService $whitepaperService */
+        $whitepaperService = \Drupal::service('whitepaper.service');
+
+        if(!$whitepaperService->userSubmittedWhitepaperForm()){
+          $build['field_pdf'] = \Drupal::formBuilder()->getForm('Drupal\whitepaper\Form\WhitepaperForm', $entity);
+        }
+
+        $build['#cache']['contexts'][] = 'cookies:Drupal_visitor_user_submitted_whitepaper_form';
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ * @param $key
+ * @param $message
+ * @param $params
+ */
+function whitepaper_mail($key, &$message, $params) {
+  switch($key){
+    case 'submit':
+
+      /** @var \Drupal\whitepaper\WhitepaperEmail $whitepaperEmail */
+      $whitepaperEmail = $params['whitepaper_email'];
+
+      $message['subject'] = t('Whitepaper Submission');
+      $message['body'][] = t('Submitted on @date', ['@date' => date('m/d/Y h:ia')]);
+      $message['body'][] = t('I Am: @i_am', ['@i_am' => $whitepaperEmail->getIAm()]);
+      $message['body'][] = t('First Name: @first_name', ['@first_name' => $whitepaperEmail->getFirstName()]);
+      $message['body'][] = t('Last Name: @last_name', ['@last_name' => $whitepaperEmail->getLastName()]);
+      $message['body'][] = t('Email: @email', ['@email' => $whitepaperEmail->getEmail()]);
+      $message['body'][] = t('Whitepaper: @whitepaper', ['@whitepaper' => $whitepaperEmail->getWhitepaper()]);
+
+      break;
+  }
+}
